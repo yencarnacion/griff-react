@@ -19,12 +19,10 @@ class Scaler extends Component {
       collections: GriffPropTypes.collections.isRequired,
     }).isRequired,
     // (domain, width) => [number, number]
-    xScalerFactory: PropTypes.func,
+    xScalerFactory: PropTypes.func.isRequired,
   };
 
-  static defaultProps = {
-    xScalerFactory: createXScale,
-  };
+  static defaultProps = {};
 
   state = {
     ySubDomains: {},
@@ -227,6 +225,12 @@ class Scaler extends Component {
 
 export default props => (
   <DataContext.Consumer>
-    {dataContext => <Scaler {...props} dataContext={dataContext} />}
+    {dataContext => (
+      <Scaler
+        {...props}
+        dataContext={dataContext}
+        xScalerFactory={createXScale}
+      />
+    )}
   </DataContext.Consumer>
 );

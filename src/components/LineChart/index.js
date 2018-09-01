@@ -20,6 +20,7 @@ import XAxis from '../XAxis';
 import AxisDisplayMode from './AxisDisplayMode';
 import AxisPlacement from '../AxisPlacement';
 import Layout from './Layout';
+import { createXScale } from '../../utils/scale-helpers';
 
 const propTypes = {
   size: PropTypes.shape({
@@ -52,7 +53,7 @@ const propTypes = {
   onAxisMouseEnter: PropTypes.func,
   // (e, seriesId) => void
   onAxisMouseLeave: PropTypes.func,
-  xScalerFactory: scalerFactoryFunc.isRequired,
+  xScalerFactory: scalerFactoryFunc,
   areas: PropTypes.arrayOf(areaPropType),
   /**
    * Pass in a callback function which will be given a defined area when the
@@ -107,6 +108,7 @@ const defaultProps = {
   onAreaDefined: null,
   onAreaClicked: null,
   pointWidth: 6,
+  xScalerFactory: createXScale,
 };
 
 class LineChartComponent extends Component {
